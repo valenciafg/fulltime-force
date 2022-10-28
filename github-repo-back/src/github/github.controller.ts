@@ -1,42 +1,22 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { GithubService } from './github.service';
-import { CreateGithubDto } from './dto/create-github.dto';
-import { UpdateGithubDto } from './dto/update-github.dto';
 
 @Controller('github')
 export class GithubController {
   constructor(private readonly githubService: GithubService) {}
 
-  @Post()
-  create(@Body() createGithubDto: CreateGithubDto) {
-    return this.githubService.create(createGithubDto);
+  @Get('current-user')
+  getCurrentUser() {
+    return this.githubService.getCurrentUser();
   }
 
-  @Get()
-  findAll() {
-    return this.githubService.findAll();
+  @Get('current-repo-commits')
+  getCurrentRepositoryCommits() {
+    return this.githubService.getCurrentRepositoryCommits();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.githubService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGithubDto: UpdateGithubDto) {
-    return this.githubService.update(+id, updateGithubDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.githubService.remove(+id);
+  @Get('repo')
+  getCurrentRepo() {
+    return this.githubService.getCurrentRepo();
   }
 }

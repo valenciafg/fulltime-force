@@ -1,24 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Octokit, App } from 'octokit';
-import { CreateGithubDto } from './dto/create-github.dto';
-import { UpdateGithubDto } from './dto/update-github.dto';
 
 @Injectable()
 export class GithubService {
   private octokit: Octokit;
+  private owner: string;
+  private repo: string;
+
   constructor(configService: ConfigService) {
     this.octokit = new Octokit({
-      auth: configService.get('GITHIB_TOKEN'),
+      auth: configService.get('GITHUB_TOKEN'),
     });
-  }
-  create(createGithubDto: CreateGithubDto) {
-    return 'This action adds a new github';
-  }
-
-  async findAll() {
-    const { data } = await this.octokit.rest.users.getAuthenticated();
-    return data;
+    this.owner = configService.get('CURRENT_OWNER');
+    this.repo = configService.get('CURRENT_REPOSITORY');
   }
 
   async getCurrentUser() {
@@ -26,15 +21,19 @@ export class GithubService {
     return data;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} github`;
+  async getCurrentRepo() {
+    const { data } = await this.octokit.request('GET /repos/{owner}/{repo}', {
+      owner: this.owner,
+      repo: this.repo,
+    });
+    return data;
   }
 
-  update(id: number, updateGithubDto: UpdateGithubDto) {
-    return `This action updates a #${id} github`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} github`;
+  async getCurrentRepositoryCommits() {
+    const { data } = await this.octokit.rest.repos.listCommits({
+      owner: this.owner,
+      repo: this.repo,
+    });
+    return data;
   }
 }

@@ -23,7 +23,7 @@ export const githubSlice = createSlice({
       state.repository = action.payload;
     },
     setCommits: (state, action) => {
-      state.commits = action.commits;
+      state.commits = action.payload;
     }
   }
 });

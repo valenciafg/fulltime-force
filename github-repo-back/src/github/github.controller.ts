@@ -5,12 +5,12 @@ import { GithubService } from './github.service';
 export class GithubController {
   constructor(private readonly githubService: GithubService) {}
 
-  @Get('current-user')
+  @Get('user')
   getCurrentUser() {
     return this.githubService.getCurrentUser();
   }
 
-  @Get('current-repo-commits')
+  @Get('repo/commits')
   getCurrentRepositoryCommits() {
     return this.githubService.getCurrentRepositoryCommits();
   }

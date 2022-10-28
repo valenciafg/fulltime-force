@@ -1,5 +1,5 @@
 import { GithubService } from '../../services';
-import { setIsLoadingProfile, setProfile, setRepository } from './githubSlice';
+import { setCommits, setIsLoadingCommits, setIsLoadingProfile, setProfile, setRepository } from './githubSlice';
 
 export const startLoadingProfile = () => {
   return async (dispatch) => {
@@ -12,5 +12,17 @@ export const startLoadingProfile = () => {
       dispatch(setRepository(repo.data));
     }
     dispatch(setIsLoadingProfile(false));
+  }
+}
+
+export const startLoadingCommits = () => {
+  return async (dispatch) => {
+    dispatch(setIsLoadingCommits(true));
+    const service = new GithubService();
+    const commits = await service.getCurrentRepositoryCommits();
+    if (commits.ok) {
+      dispatch(setCommits(commits.data));
+    }
+    dispatch(setIsLoadingCommits(false));
   }
 }

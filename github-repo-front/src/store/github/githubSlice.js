@@ -10,6 +10,12 @@ export const githubSlice = createSlice({
     commits: []
   },
   reducers: {
+    cleanProfile: (state) => {
+      state.profile = null;
+    },
+    cleanCommits: (state) => {
+      state.commits = [];
+    },
     setIsLoadingProfile: (state, action) => {
       state.isLoadingProfile = action.payload;
     },
@@ -29,6 +35,8 @@ export const githubSlice = createSlice({
 });
 
 export const {
+  cleanProfile,
+  cleanCommits,
   setIsLoadingProfile,
   setIsLoadingCommits,
   setProfile,

@@ -4,15 +4,14 @@ import { startLoadingProfile } from '../../../store/github';
 
 export const useProfile = () => {
   const dispatch = useDispatch();
-  const { profile } = useSelector(state => state.github)
-  const [isLoading, setIsLoading] = useState(false);
+  const { profile, isLoadingProfile } = useSelector(state => state.github)
 
   useEffect(() => {
     dispatch(startLoadingProfile());
   }, []);
 
   return {
-    isLoading,
+    isLoadingProfile,
     profile
   }
 }

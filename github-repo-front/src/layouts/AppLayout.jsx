@@ -1,11 +1,13 @@
-import { Footer, NavBar } from './components'
+import { Footer, NavBar, Container } from './components'
 
 export const AppLayout = ({children}) => {
   return (
-    <div className='bg-red-200'>
-        <NavBar />
+    <div className='bg-gray-800'>
+      <NavBar />
+      <Container>
         {children}
-        <Footer />
+      </Container>
+      <Footer />
     </div>
   )
 }

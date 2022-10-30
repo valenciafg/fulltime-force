@@ -1,4 +1,5 @@
 import { AppLayout } from '../../layouts/AppLayout'
+import { Loading } from '../../layouts/components';
 import { ProfileCard } from './components/ProfileCard';
 import { useProfile } from './hooks/useProfile'
 
@@ -7,7 +8,7 @@ export const ProfilePage = () => {
   return (
     <AppLayout>
       {isLoadingProfile && (
-        <h1>cargando</h1>
+        <Loading />
       )}
       {profile && (
         <ProfileCard profile={profile} />

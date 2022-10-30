@@ -1,15 +1,18 @@
 import { AppLayout } from '../../layouts/AppLayout';
-import { CommitSkeleton, CommitTable } from './components';
+import { Loading } from '../../layouts/components';
+import { CommitTable } from './components';
+import { RepositoryInfo } from './components/RepositoryInfo';
 import { useCommit } from './hooks/useCommit';
 
 export const CommitPage = () => {
-  const { commits, isLoadingCommits } = useCommit();
-  console.log({ commits });
+  const { commits, isLoadingCommits, repository } = useCommit();
   return (
     <AppLayout>
+      {repository && (
+        <RepositoryInfo repository={repository} />
+      )}
       {isLoadingCommits && (
-        <h1>Cargando...</h1>
-        // <CommitSkeleton />
+        <Loading />
       )}
       {commits.length > 0 && (
         <CommitTable commits={commits} />

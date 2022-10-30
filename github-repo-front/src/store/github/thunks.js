@@ -36,3 +36,17 @@ export const startLoadingCommits = () => {
     dispatch(setIsLoadingCommits(false));
   }
 }
+
+export const startLoafingCommitsByBranch = (branch) => {
+  return async (dispatch) => {
+    dispatch(cleanCommits());
+    dispatch(setIsLoadingCommits(true));
+    dispatch(setCurrentBranch(branch));
+    const service = new GithubService();
+    const commits = await service.getCurrentRepositoryCommits(branch);
+    if (commits.ok) {
+      dispatch(setCommits(commits.data));
+    }
+    dispatch(setIsLoadingCommits(false));
+  }
+}

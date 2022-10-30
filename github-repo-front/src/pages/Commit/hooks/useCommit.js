@@ -4,7 +4,7 @@ import { startLoadingCommits } from '../../../store/github';
 
 export const useCommit = () => {
   const dispatch = useDispatch();
-  const { isLoadingCommits, commits } = useSelector(state => state.github)
+  const { isLoadingCommits, commits, repository } = useSelector(state => state.github)
 
   useEffect(() => {
     dispatch(startLoadingCommits());
@@ -12,6 +12,7 @@ export const useCommit = () => {
 
   return {
     isLoadingCommits,
+    repository,
     commits
   }
 }

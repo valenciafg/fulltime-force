@@ -6,7 +6,7 @@
 * Create a copy from .env.example and rename to .env
 * Open .env file and add GITHUB_TOKEN value, for this example can use this temporal token:
 ```
-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
+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
 ```
 
 ## Running the app from Docker

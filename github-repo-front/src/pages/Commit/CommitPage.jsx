@@ -1,5 +1,5 @@
-import { AppLayout } from '../../layouts/AppLayout'
-import { CommitTable } from './components/CommitTable';
+import { AppLayout } from '../../layouts/AppLayout';
+import { CommitSkeleton, CommitTable } from './components';
 import { useCommit } from './hooks/useCommit';
 
 export const CommitPage = () => {
@@ -8,7 +8,8 @@ export const CommitPage = () => {
   return (
     <AppLayout>
       {isLoadingCommits && (
-        <h1>cargando</h1>
+        <h1>Cargando...</h1>
+        // <CommitSkeleton />
       )}
       {commits.length > 0 && (
         <CommitTable commits={commits} />

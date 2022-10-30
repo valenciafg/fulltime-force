@@ -1,5 +1,5 @@
 import { GithubService } from '../../services';
-import { cleanCommits, cleanProfile, setCommits, setIsLoadingCommits, setIsLoadingProfile, setProfile, setRepository } from './githubSlice';
+import { cleanBranches, cleanCommits, cleanProfile, setBranches, setCommits, setCurrentBranch, setIsLoadingCommits, setIsLoadingProfile, setProfile, setRepository } from './githubSlice';
 
 export const startLoadingProfile = () => {
   return async (dispatch) => {
@@ -17,13 +17,21 @@ export const startLoadingProfile = () => {
 export const startLoadingCommits = () => {
   return async (dispatch) => {
     dispatch(cleanCommits());
+    dispatch(cleanBranches());
     dispatch(setIsLoadingCommits(true));
     const service = new GithubService();
-    const commits = await service.getCurrentRepositoryCommits();
-    const repo = await service.getCurrentRepo();
-    if (commits.ok && repo.ok) {
-      dispatch(setCommits(commits.data));
-      dispatch(setRepository(repo.data));
+    const branchesResponse = await service.getCurrentRepositoryBranches();
+    if (branchesResponse.ok) {
+      const branches = branchesResponse.data.map(b => b.name);
+      const [currentBranch] = branches;
+      dispatch(setBranches(branches));
+      dispatch(setCurrentBranch(currentBranch));
+      const commits = await service.getCurrentRepositoryCommits(currentBranch);
+      const repo = await service.getCurrentRepo();
+      if (commits.ok && repo.ok) {
+        dispatch(setCommits(commits.data));
+        dispatch(setRepository(repo.data));
+      }
     }
     dispatch(setIsLoadingCommits(false));
   }

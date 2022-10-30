@@ -30,11 +30,23 @@ export class GithubService {
         }
         return { ok, data };
     }
-    async getCurrentRepositoryCommits() {
+    async getCurrentRepositoryCommits(branch) {
         let ok = true;
         let data = [];
         try {
-            const response = await this.request.get('/repo/commits');
+            const response = await this.request.get(`/repo/commits?branch=${branch}`);
+            data = response.data;
+        } catch (error) {
+            console.log(error);
+            ok = false
+        }
+        return { ok, data };
+    }
+    async getCurrentRepositoryBranches() {
+        let ok = true;
+        let data = [];
+        try {
+            const response = await this.request.get('/repo/branches');
             data = response.data;
         } catch (error) {
             console.log(error);

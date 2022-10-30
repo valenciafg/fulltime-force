@@ -1,6 +1,8 @@
+import { useSelector } from 'react-redux';
 import { CommitTableRow } from './CommitTableRow'
 
 export const CommitTable = ({ commits }) => {
+  const { branches, currentBranch } = useSelector(state => state.github);
   const commitsCount = commits.length;
   return (
     <div className="">
@@ -12,10 +14,11 @@ export const CommitTable = ({ commits }) => {
           <div className="flex flex-row mb-1 sm:mb-0">
             <div className="relative">
               <select
-                  className="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                  <option>5</option>
-                  <option>10</option>
-                  <option>20</option>
+                // className="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              >
+                {branches.map(b => (
+                  <option value={b}>{b}</option>
+                ))}
               </select>
             </div>
           </div>

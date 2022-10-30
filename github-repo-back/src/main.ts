@@ -14,8 +14,8 @@ async function bootstrap() {
     }),
   );
   const options = new DocumentBuilder()
-    .setTitle('Apply digital challenge')
-    .setDescription('API to search Hacker news')
+    .setTitle('Github repo challenge')
+    .setDescription('API to get commits from current repository')
     .setVersion('1.0.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);

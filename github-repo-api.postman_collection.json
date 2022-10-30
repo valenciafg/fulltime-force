@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "2953f47a-c974-45c7-b0d2-2d71014e6ae2",
+		"name": "github-repo-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "391274"
+	},
+	"item": [
+		{
+			"name": "Get user info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/user",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get repo branches",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/repo/branches",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"repo",
+						"branches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get repo info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/repo",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"repo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get repo commits by branch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/repo/commits?branch=master",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"repo",
+						"commits"
+					],
+					"query": [
+						{
+							"key": "branch",
+							"value": "master"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "localhost:3000/api/github",
+			"type": "string"
+		}
+	]
+}

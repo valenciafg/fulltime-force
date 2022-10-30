@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  backend:
+    image: github-repo-back:v1
+    container_name: github-repo-back
+    build:
+      context: ./github-repo-back
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - 3000:3000
+    restart: always
+    networks:
+      - ms_github_repo
+  frontend:
+    image: github-repo-front:v1
+    container_name: github-repo-front
+    build:
+      context: ./github-repo-front
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - 4000:5173
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - ms_github_repo
+networks:
+  ms_github_repo:

@@ -18,7 +18,9 @@ export class GithubService {
   }
 
   async getCurrentUser() {
-    const { data } = await this.octokit.rest.users.getAuthenticated();
+    const { data } = await this.octokit.rest.users.getByUsername({
+      username: this.owner,
+    });
     return data;
   }
 

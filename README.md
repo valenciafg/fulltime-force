@@ -4,10 +4,7 @@
 ## Configure environment
 
 * Create a copy from .env.example and rename to .env
-* Open .env file and add GITHUB_TOKEN value, for this example can use this temporal token:
-```
-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
-```
+* Open .env file and add GITHUB_TOKEN value, can ask me for token value [here](mailto:valencia6x@gmail.com) or is included in the mail when sending the link of this repository.
 
 ## Running the app from Docker
 
